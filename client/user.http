@@ -1,0 +1,15 @@
+@url = http://localhost:3000/
+@randomNumber = {{$randomInt 0 9999999}}
+
+### @name createUser
+POST {{url}}user HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstName": "Test",
+    "lastName": "USER",
+    "username": "useruser{{randomNumber}}",
+    "email": "mail{{randomNumber}}@mail.com",
+    "password": "123456789",
+    "role": "USER"
+}
