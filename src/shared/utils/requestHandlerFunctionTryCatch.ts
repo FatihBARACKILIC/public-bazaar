@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import RequestHandlerFunction from "../shared/types/requestHandlerFunction.type";
+import RequestHandlerFunction from "../types/requestHandlerFunction.type";
 
 const requestHandlerFunctionTryCatch = (
   fn: RequestHandlerFunction<unknown>
