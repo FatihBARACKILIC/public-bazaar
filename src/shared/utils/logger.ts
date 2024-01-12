@@ -1,5 +1,5 @@
 import pino from "pino";
-import { LOG_LEVEL } from "../shared/constant/config.constant";
+import { LOG_LEVEL } from "../constant/config.constant";
 
 const logger = pino({
   timestamp: () =>
