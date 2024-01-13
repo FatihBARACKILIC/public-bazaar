@@ -24,7 +24,7 @@ class UserRoutes extends BaseRoutes {
   protected runRoutes(): void {
     this.router.post(
       `${this.routeMainURL}user`,
-      requestHandlerFunctionTryCatch(this.controller.register)
+      requestHandlerFunctionTryCatch(this.controller.createUser)
     );
   }
 }

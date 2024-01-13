@@ -1,4 +1,4 @@
-type RegisterType = {
+type CreateUserType = {
   firstName: string;
   lastName?: string;
   username: string;
@@ -14,9 +14,11 @@ type UserType = {
   username: string;
   email: string;
   password: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at?: Date;
+  updated_at?: Date;
   role: "USER" | "SELLER";
 };
 
-export type { RegisterType, UserType };
+type UpdateUserType = Partial<CreateUserType>;
+
+export type { CreateUserType, UpdateUserType, UserType };

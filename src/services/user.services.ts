@@ -1,24 +1,49 @@
 import { $Enums } from "@prisma/client";
-import { RegisterType, UserType } from "../shared/types/user.type";
+import type {
+  CreateUserType,
+  UpdateUserType,
+  UserType,
+} from "../shared/types/user.type";
 import BaseServices from "./base.services";
 
 interface IUserServices {
-  register(user: RegisterType): Promise<UserType>;
-  logIn(): Promise<UserType>;
+  createUser(user: CreateUserType): Promise<UserType>;
+  getUser(username: string): Promise<UserType>;
+  updateUser(user: UpdateUserType): Promise<UserType>;
+  deleteUser(user: unknown): Promise<UserType>;
 }
 
 class UserServices extends BaseServices implements IUserServices {
-  async register(user: RegisterType): Promise<UserType> {
+  protected readonly allReturns: { [key: string]: unknown };
+
+  constructor() {
+    super();
+
+    this.allReturns = {
+      id: true,
+      firstName: true,
+      lastName: true,
+      username: true,
+      email: true,
+      password: true,
+      created_at: true,
+      updated_at: true,
+      role: true,
+    };
+  }
+
+  async createUser(user: CreateUserType): Promise<UserType> {
     try {
-      const { firstName, lastName, username, email, password, role } = user;
+      // const { firstName, lastName, username, email, password, role } = user;
       const newUser = await this.db.users.create({
         data: {
-          firstName,
-          lastName,
-          username,
-          email,
-          password,
-          role: role as $Enums.Role,
+          ...user,
+          role: user.role as $Enums.Role,
+        },
+        select: {
+          ...this.allReturns,
+          created_at: false,
+          updated_at: false,
         },
       });
       return newUser as UserType;
@@ -27,7 +52,15 @@ class UserServices extends BaseServices implements IUserServices {
     }
   }
 
-  async logIn(): Promise<UserType> {
+  getUser(username: string): Promise<UserType> {
+    throw new Error("Method not implemented.");
+  }
+
+  updateUser(user: UpdateUserType): Promise<UserType> {
+    throw new Error("Method not implemented.");
+  }
+
+  deleteUser(user: unknown): Promise<UserType> {
     throw new Error("Method not implemented.");
   }
 }
