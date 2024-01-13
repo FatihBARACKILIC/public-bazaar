@@ -4,6 +4,9 @@ import express from "express";
 import helmet from "helmet";
 import logger from "../utils/logger";
 
+/**
+ * Base class for configuring middlewares in Express.
+ */
 abstract class BaseConfigMiddleware {
   protected abstract setExpress: () => void;
   protected abstract setCors: () => void;
@@ -11,6 +14,9 @@ abstract class BaseConfigMiddleware {
   protected abstract setLogger: () => void;
 }
 
+/**
+ * ConfigMiddlewares class is responsible for setting up various middlewares for the Express app.
+ */
 class ConfigMiddlewares extends BaseConfigMiddleware {
   private readonly app: Express;
 
@@ -19,20 +25,29 @@ class ConfigMiddlewares extends BaseConfigMiddleware {
 
     this.app = app;
 
+    this.setLogger();
     this.setCors();
     this.setHelmet();
     this.setExpress();
-    this.setLogger();
   }
 
+  /**
+   * Sets up the Express middleware for the application.
+   */
   protected setExpress = () => {
     this.app.use(express.json());
   };
 
+  /**
+   * Sets up the CORS middleware for the application.
+   */
   protected setCors = () => {
     this.app.use(cors({ origin: "*" }));
   };
 
+  /**
+   * Sets the helmet middleware for enhanced security.
+   */
   protected setHelmet = () => {
     this.app.use(
       helmet({
@@ -55,6 +70,9 @@ class ConfigMiddlewares extends BaseConfigMiddleware {
     );
   };
 
+  /**
+   * Sets up a logger middleware that logs request details and response time.
+   */
   protected setLogger = () => {
     this.app.use((req: Request, res: Response, next: NextFunction) => {
       const { method, url } = req;

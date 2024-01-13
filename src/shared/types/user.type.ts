@@ -1,22 +1,22 @@
-interface RegisterType {
+type RegisterType = {
   firstName: string;
   lastName?: string;
   username: string;
   email: string;
   password: string;
-  role: unknown;
-}
+  role: "USER" | "SELLER";
+};
 
-interface UserType {
+type UserType = {
   id: string;
   firstName: string;
-  lastName: string | null | undefined;
+  lastName: string | null;
   username: string;
   email: string;
   password: string;
   created_at: Date;
   updated_at: Date;
-  role: unknown;
-}
+  role: "USER" | "SELLER";
+};
 
-export { RegisterType, UserType };
+export type { RegisterType, UserType };

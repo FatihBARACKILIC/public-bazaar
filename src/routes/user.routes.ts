@@ -1,5 +1,5 @@
 import type { Express } from "express";
-import BaseController from "../controllers/base.controllers";
+import BaseControllers from "../controllers/base.controllers";
 import UserController, {
   IUserController,
 } from "../controllers/user.controllers";
@@ -9,7 +9,7 @@ import BaseRoutes from "./base.routes";
 class UserRoutes extends BaseRoutes {
   protected readonly router: Express;
   protected readonly routeMainURL: string;
-  protected readonly controller: BaseController & IUserController;
+  protected readonly controller: BaseControllers & IUserController;
 
   constructor(router: Express, routeMainURL: string = "/") {
     super();

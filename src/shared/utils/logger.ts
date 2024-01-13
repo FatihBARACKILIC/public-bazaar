@@ -1,6 +1,9 @@
 import pino from "pino";
 import { LOG_LEVEL } from "../constant/config.constant";
 
+/**
+ * Logger instance for logging application events.
+ */
 const logger = pino({
   timestamp: () =>
     `,"time":"${new Date().toISOString()}","timeStamp":"${Date.now()}"`,
