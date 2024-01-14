@@ -1,4 +1,4 @@
-@url = http://localhost:3000/
+@url = http://localhost:3000/api/v1/
 @randomNumber = {{$randomInt 0 9999999}}
 
 ### @name createUser

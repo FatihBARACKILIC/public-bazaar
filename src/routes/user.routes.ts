@@ -8,22 +8,21 @@ import BaseRoutes from "./base.routes";
 
 class UserRoutes extends BaseRoutes {
   protected readonly router: Express;
-  protected readonly routeMainURL: string;
   protected readonly controller: BaseControllers & IUserController;
 
-  constructor(router: Express, routeMainURL: string = "/") {
-    super();
+  constructor(router: Express) {
+    super("user");
 
     this.router = router;
-    this.routeMainURL = routeMainURL;
     this.controller = new UserController();
 
     this.runRoutes();
   }
 
   protected runRoutes(): void {
+    // POST /api/v1/user/
     this.router.post(
-      `${this.routeMainURL}user`,
+      this.routeMainUrl,
       requestHandlerFunctionTryCatch(this.controller.createUser)
     );
   }
