@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import BaseServices from "../services/base.services";
-import UserServices, { IUserServices } from "../services/user.services";
+import UserServices from "../services/user.services";
 import IUserController from "../shared/interfaces/controllers/iUserControllers.interface";
+import IUserServices from "../shared/interfaces/services/iUserServices.interface";
 import { CreateUserType } from "../shared/types/user.type";
 import BaseControllers from "./base.controllers";
 
@@ -41,4 +42,3 @@ class UserController extends BaseControllers implements IUserController {
 }
 
 export default UserController;
-export { IUserController };

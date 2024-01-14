@@ -1,9 +1,10 @@
 import type { Express } from "express";
 import express from "express";
-import ConfigMiddlewares from "./shared/middlewares/config.middlewares";
 import UserRoutes from "./routes/user.routes";
+import { API_URL } from "./shared/constant/app.constant";
 import { PORT } from "./shared/constant/config.constant";
 import errorHandler from "./shared/error/errorHandler";
+import ConfigMiddlewares from "./shared/middlewares/config.middlewares";
 import logger from "./shared/utils/logger";
 
 /**
@@ -59,7 +60,10 @@ class App {
       logger.warn(`App is already running`);
     } else {
       this.app.listen(PORT, () => {
-        logger.info(`http://localhost:${PORT}`);
+        logger.info({
+          mainUrl: `http://localhost:${PORT}`,
+          apiUrl: `http://localhost:${PORT}${API_URL}`,
+        });
       });
       App._isRunning = true;
     }

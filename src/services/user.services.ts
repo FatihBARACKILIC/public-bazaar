@@ -1,11 +1,7 @@
 import { $Enums } from "@prisma/client";
-import type {
-  CreateUserType,
-  UpdateUserType,
-  UserType,
-} from "../shared/types/user.type";
-import BaseServices from "./base.services";
 import IUserServices from "../shared/interfaces/services/iUserServices.interface";
+import type { CreateUserType, UserType } from "../shared/types/user.type";
+import BaseServices from "./base.services";
 
 class UserServices extends BaseServices implements IUserServices {
   createUser = async (user: CreateUserType): Promise<UserType> => {
@@ -36,7 +32,7 @@ class UserServices extends BaseServices implements IUserServices {
     }
   };
 
-  updateUser = async (user: UpdateUserType): Promise<UserType> => {
+  updateUser = async (user: Partial<CreateUserType>): Promise<UserType> => {
     throw new Error("Method not implemented.");
   };
 
@@ -46,4 +42,3 @@ class UserServices extends BaseServices implements IUserServices {
 }
 
 export default UserServices;
-export type { IUserServices };

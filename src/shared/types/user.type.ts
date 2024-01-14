@@ -19,6 +19,4 @@ type UserType = {
   role: "USER" | "SELLER";
 };
 
-type UpdateUserType = Partial<CreateUserType>;
-
-export type { CreateUserType, UpdateUserType, UserType };
+export type { CreateUserType, UserType };

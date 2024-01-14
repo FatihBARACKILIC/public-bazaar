@@ -1,8 +1,4 @@
-import {
-  CreateUserType,
-  UserType,
-  UpdateUserType,
-} from "../../types/user.type";
+import { CreateUserType, UserType } from "../../types/user.type";
 
 /**
  * Represents a set of user services.
@@ -27,7 +23,7 @@ interface IUserServices {
    * @param user - The updated user data.
    * @returns A promise that resolves to the updated user.
    */
-  updateUser(user: UpdateUserType): Promise<UserType>;
+  updateUser(user: Partial<CreateUserType>): Promise<UserType>;
 
   /**
    * Deletes a user.
