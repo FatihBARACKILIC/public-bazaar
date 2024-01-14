@@ -7,7 +7,6 @@ import PrismaConnection from "../shared/connection/prisma.connection";
  */
 abstract class BaseServices {
   protected readonly db: PrismaClient = PrismaConnection.getInstance();
-  protected abstract readonly allReturns: { [key: string]: unknown };
 }
 
 export default BaseServices;

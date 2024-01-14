@@ -1,16 +1,9 @@
 import { NextFunction, Request, Response } from "express";
+import BaseServices from "../services/base.services";
 import UserServices, { IUserServices } from "../services/user.services";
+import IUserController from "../shared/interfaces/controllers/iUserControllers.interface";
 import { CreateUserType } from "../shared/types/user.type";
 import BaseControllers from "./base.controllers";
-import BaseServices from "../services/base.services";
-import RequestHandlerFunction from "../shared/types/requestHandlerFunction.type";
-
-interface IUserController {
-  createUser: RequestHandlerFunction;
-  getUser: RequestHandlerFunction;
-  updateUser: RequestHandlerFunction;
-  deleteUser: RequestHandlerFunction;
-}
 
 class UserController extends BaseControllers implements IUserController {
   protected readonly services: BaseServices & IUserServices;
@@ -29,7 +22,7 @@ class UserController extends BaseControllers implements IUserController {
     const newUser: CreateUserType = req.body;
     const response = await this.services.createUser(newUser);
     res.status(200).json({
-      message: "User registered",
+      message: "User Created",
       user: response,
     });
   };

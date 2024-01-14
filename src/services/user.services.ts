@@ -5,64 +5,44 @@ import type {
   UserType,
 } from "../shared/types/user.type";
 import BaseServices from "./base.services";
-
-interface IUserServices {
-  createUser(user: CreateUserType): Promise<UserType>;
-  getUser(username: string): Promise<UserType>;
-  updateUser(user: UpdateUserType): Promise<UserType>;
-  deleteUser(user: unknown): Promise<UserType>;
-}
+import IUserServices from "../shared/interfaces/services/iUserServices.interface";
 
 class UserServices extends BaseServices implements IUserServices {
-  protected readonly allReturns: { [key: string]: unknown };
-
-  constructor() {
-    super();
-
-    this.allReturns = {
-      id: true,
-      firstName: true,
-      lastName: true,
-      username: true,
-      email: true,
-      password: true,
-      created_at: true,
-      updated_at: true,
-      role: true,
-    };
-  }
-
-  async createUser(user: CreateUserType): Promise<UserType> {
+  createUser = async (user: CreateUserType): Promise<UserType> => {
     try {
-      // const { firstName, lastName, username, email, password, role } = user;
-      const newUser = await this.db.users.create({
+      const newUser: UserType = await this.db.users.create({
         data: {
           ...user,
           role: user.role as $Enums.Role,
         },
-        select: {
-          ...this.allReturns,
-          created_at: false,
-          updated_at: false,
-        },
       });
-      return newUser as UserType;
+      return newUser;
     } catch (error) {
       throw error;
     }
-  }
+  };
 
-  getUser(username: string): Promise<UserType> {
-    throw new Error("Method not implemented.");
-  }
+  getUser = async (username: string): Promise<UserType | null> => {
+    try {
+      const user: UserType | null = await this.db.users.findUnique({
+        where: {
+          username,
+        },
+      });
 
-  updateUser(user: UpdateUserType): Promise<UserType> {
-    throw new Error("Method not implemented.");
-  }
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  };
 
-  deleteUser(user: unknown): Promise<UserType> {
+  updateUser = async (user: UpdateUserType): Promise<UserType> => {
     throw new Error("Method not implemented.");
-  }
+  };
+
+  deleteUser = async (user: unknown): Promise<UserType> => {
+    throw new Error("Method not implemented.");
+  };
 }
 
 export default UserServices;
