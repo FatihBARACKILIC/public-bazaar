@@ -2,13 +2,17 @@ import { $Enums } from "@prisma/client";
 import IUserServices from "../shared/interfaces/services/iUserServices.interface";
 import type { CreateUserType, UserType } from "../shared/types/user.type";
 import BaseServices from "./base.services";
+import { bcryptHash } from "../shared/utils/bcrypt";
 
 class UserServices extends BaseServices implements IUserServices {
   createUser = async (user: CreateUserType): Promise<UserType> => {
     try {
+      const password = await bcryptHash(user.password);
+
       const newUser: UserType = await this.db.users.create({
         data: {
           ...user,
+          password,
           role: user.role as $Enums.Role,
         },
       });
