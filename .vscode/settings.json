@@ -30,7 +30,6 @@
         "**/Thumbs.db": true,
         "**/node_modules": true,
         "**/logs": true,
-        "**/.devcontainer": true,
         ".gitignore": true,
         "README.md": true,
         "*.json": true,
