@@ -6,6 +6,7 @@ import { PORT } from "./shared/constant/config.constant";
 import errorHandler from "./shared/error/errorHandler";
 import ConfigMiddlewares from "./shared/middlewares/config.middlewares";
 import logger from "./shared/utils/logger";
+import AuthenticationRoutes from "./routes/authentication.routes";
 
 /**
  * Represents the main application class.
@@ -43,6 +44,7 @@ class App {
    */
   private setRoutes = (): void => {
     new UserRoutes(this.app);
+    new AuthenticationRoutes(this.app);
   };
 
   /**

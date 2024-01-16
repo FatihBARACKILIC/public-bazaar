@@ -7,18 +7,29 @@ import { bcryptHash } from "../shared/utils/bcrypt";
 class UserServices extends BaseServices implements IUserServices {
   createUser = async (user: CreateUserType): Promise<UserType> => {
     try {
-      const password = await bcryptHash(user.password);
+      const {
+        firstName,
+        lastName,
+        username,
+        email,
+        password,
+        role,
+      }: CreateUserType = user;
+      const hashedPassword = await bcryptHash(password);
 
       const newUser: UserType = await this.db.users.create({
         data: {
-          ...user,
-          password,
-          role: user.role as $Enums.Role,
+          firstName,
+          lastName,
+          username,
+          email,
+          password: hashedPassword,
+          role: role as $Enums.Role,
         },
       });
       return newUser;
-    } catch (error) {
-      throw error;
+    } catch (error: unknown) {
+      throw error instanceof Error ? error : new Error(error as string);
     }
   };
 

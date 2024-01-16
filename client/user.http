@@ -1,8 +1,12 @@
 @url = http://localhost:3000/api/v1/
+@user = {{url}}user/
+
 @randomNumber = {{$randomInt 0 9999999}}
 
+
+
 ### @name createUser
-POST {{url}}user HTTP/1.1
+POST {{user}} HTTP/1.1
 Content-Type: application/json
 
 {
@@ -13,3 +17,14 @@ Content-Type: application/json
     "password": "123456789",
     "role": "USER"
 }
+
+### @name login
+POST {{url}}login HTTP/1.1
+Content-Type: application/json
+    # "username": "useruser",
+
+{
+    "email": "mail@mail.com",
+    "password": "123456789"
+}
+

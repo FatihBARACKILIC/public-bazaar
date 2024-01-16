@@ -9,7 +9,7 @@ const bcryptVerify = async (
   passwordOfDb: string,
   passwordOfUser: string
 ): Promise<boolean> => {
-  const result = await bcrypt.compare(passwordOfDb, passwordOfUser);
+  const result = await bcrypt.compare(passwordOfUser, passwordOfDb);
   return result;
 };
 

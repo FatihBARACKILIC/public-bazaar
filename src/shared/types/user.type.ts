@@ -19,4 +19,16 @@ type UserType = {
   role: "USER" | "SELLER";
 };
 
-export type { CreateUserType, UserType };
+type LoginType = {
+  username?: string;
+  email?: string;
+  password: string;
+};
+
+type TokenType = {
+  id: string;
+  username: string;
+  role: "USER" | "SELLER";
+};
+
+export type { CreateUserType, LoginType, TokenType, UserType };

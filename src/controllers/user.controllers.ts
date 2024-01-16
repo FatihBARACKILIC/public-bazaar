@@ -5,6 +5,7 @@ import IUserController from "../shared/interfaces/controllers/iUserControllers.i
 import IUserServices from "../shared/interfaces/services/iUserServices.interface";
 import { CreateUserType } from "../shared/types/user.type";
 import BaseControllers from "./base.controllers";
+import HttpStatusCode from "../shared/enums/httpStatusCode.enum";
 
 class UserController extends BaseControllers implements IUserController {
   protected readonly services: BaseServices & IUserServices;
@@ -22,7 +23,7 @@ class UserController extends BaseControllers implements IUserController {
   ): Promise<void> => {
     const newUser: CreateUserType = req.body;
     const response = await this.services.createUser(newUser);
-    res.status(200).json({
+    res.status(HttpStatusCode.CREATED).json({
       message: "User Created",
       user: response,
     });
