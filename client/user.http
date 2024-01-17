@@ -14,7 +14,7 @@ Content-Type: application/json
     "lastName": "USER",
     "username": "useruser{{randomNumber}}",
     "email": "mail{{randomNumber}}@mail.com",
-    "password": "123456789",
+    "password": "1aB!cD0*",
     "role": "USER"
 }
 
@@ -26,7 +26,7 @@ Content-Type: application/json
 # "username": "useruser",
 {
     "email": "mail@mail.com",
-    "password": "123456789"
+    "password": "1aB!cD0*"
 }
 
 ### GET USER WITH USERNAME
@@ -41,13 +41,13 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {
-    "password": "123456789",
+    "password": "1aB!cD0*",
     "user": {
-        "firstName": "-Test",
-        "lastName": "-USER",
-        "username": "-useruser{{randomNumber}}",
-        "email": "-mail{{randomNumber}}-2@mail.com",
-        "password": "-123456789",
+        "firstName": "TestUser",
+        "lastName": "USERUSER",
+        "username": "useruser{{randomNumber}}",
+        "email": "mail{{randomNumber}}@mail.com",
+        "password": "1aB!cD0*",
         "role": "SELLER"
     }
 }
@@ -59,9 +59,9 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {
-    "password": "123456789",
+    "password": "1aB!cD0*",
     "user": {
-        "role": "SELLER"
+        "role": "USER"
     }
 }
 
@@ -72,7 +72,7 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {
-    "password": "123456789"
+    "password": "1aB!cD0*"
 }
 
 ### DELETE USER
@@ -82,5 +82,5 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {
-    "password": "123456789"
+    "password": "1aB!cD0*"
 }

@@ -10,6 +10,7 @@ abstract class BaseRoutes {
   protected abstract readonly router: Express;
   private _routeMainUrl: string = API_URL;
   protected abstract readonly controller: BaseControllers;
+  protected abstract readonly validations: unknown;
 
   protected get routeMainUrl(): string {
     return this._routeMainUrl;

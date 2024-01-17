@@ -5,16 +5,20 @@ import IUserController from "../shared/interfaces/controllers/iUserControllers.i
 import requestHandlerFunctionTryCatch from "../shared/utils/requestHandlerFunctionTryCatch";
 import BaseRoutes from "./base.routes";
 import authenticationMiddle from "../shared/middlewares/authentication.middleware";
+import validationMiddleware from "../shared/middlewares/validation.middleware";
+import UserValidations from "../shared/validations/user.validations";
 
 class UserRoutes extends BaseRoutes {
   protected readonly router: Express;
   protected readonly controller: BaseControllers & IUserController;
+  protected readonly validations: UserValidations;
 
   constructor(router: Express) {
     super("user");
 
     this.router = router;
     this.controller = new UserController();
+    this.validations = new UserValidations();
 
     this.runRoutes();
   }
@@ -23,6 +27,7 @@ class UserRoutes extends BaseRoutes {
     // POST /user
     this.router.post(
       this.routeMainUrl,
+      validationMiddleware(this.validations.createUser),
       requestHandlerFunctionTryCatch(this.controller.createUser)
     );
     // GET /user/:username
@@ -33,24 +38,28 @@ class UserRoutes extends BaseRoutes {
     // PUT /user
     this.router.put(
       this.routeMainUrl,
+      validationMiddleware(this.validations.updateUser),
       authenticationMiddle,
       requestHandlerFunctionTryCatch(this.controller.updateUser)
     );
     // PATCH /user
     this.router.patch(
       this.routeMainUrl,
+      validationMiddleware(this.validations.updateUser),
       authenticationMiddle,
       requestHandlerFunctionTryCatch(this.controller.updateUser)
     );
     // PATCH /user/freeze
     this.router.patch(
       this.generateSanitizedRouteUrl("freeze"),
+      validationMiddleware(this.validations.onlyPassword),
       authenticationMiddle,
       requestHandlerFunctionTryCatch(this.controller.freezeAccount)
     );
     // DELETE /user
     this.router.delete(
       this.routeMainUrl,
+      validationMiddleware(this.validations.onlyPassword),
       authenticationMiddle,
       requestHandlerFunctionTryCatch(this.controller.deleteUser)
     );

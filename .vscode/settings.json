@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
+        "alphanum",
         "bierner",
         "Chakroun",
         "dbaeumer",
@@ -10,7 +11,8 @@
         "intellsmi",
         "pino",
         "prestart",
-        "rangav"
+        "rangav",
+        "tlds"
     ],
     "explorer.fileNesting.patterns": {
         "*.ts": "${capture}.js",
