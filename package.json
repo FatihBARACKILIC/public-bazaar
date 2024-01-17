@@ -8,6 +8,7 @@
     "prestart": "npm run build",
     "start": "node ./dist/index.js",
     "dev": "nodemon",
+    "update": "npm update",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio"
   },
