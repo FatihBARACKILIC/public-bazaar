@@ -4,9 +4,9 @@ import UserController from "../controllers/user.controllers";
 import IUserController from "../shared/interfaces/controllers/iUserControllers.interface";
 import requestHandlerFunctionTryCatch from "../shared/utils/requestHandlerFunctionTryCatch";
 import BaseRoutes from "./base.routes";
-import authenticationMiddle from "../shared/middlewares/authentication.middleware";
-import validationMiddleware from "../shared/middlewares/validation.middleware";
 import UserValidations from "../shared/validations/user.validations";
+import validationMiddleware from "../middlewares/validation.middleware";
+import authenticationMiddle from "../middlewares/authentication.middleware";
 
 class UserRoutes extends BaseRoutes {
   protected readonly router: Express;

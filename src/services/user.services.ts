@@ -8,8 +8,13 @@ import type {
 } from "../shared/types/user.type";
 import { bcryptHash, bcryptVerify } from "../shared/utils/bcrypt";
 import BaseServices from "./base.services";
+import NotFoundError from "../shared/error/notFound.error";
+import UnauthorizedError from "../shared/error/unauthorized.error";
 
 class UserServices extends BaseServices implements IUserServices {
+  private readonly userNotFound = new NotFoundError("User not found");
+  private readonly invalidPassword = new UnauthorizedError("Invalid password!");
+
   createUser = async (user: CreateUserType): Promise<SafeUserType> => {
     try {
       const {
@@ -48,7 +53,7 @@ class UserServices extends BaseServices implements IUserServices {
         },
       });
 
-      if (!user) throw new Error("User not found");
+      if (!user) throw this.userNotFound;
 
       const { password: _, ...safeData } = user;
 
@@ -70,13 +75,13 @@ class UserServices extends BaseServices implements IUserServices {
         },
       });
 
-      if (!existsUser) throw new Error("User not found");
+      if (!existsUser) throw this.userNotFound;
 
       const verifiedPassword: boolean = await bcryptVerify(
         existsUser.password,
         password
       );
-      if (!verifiedPassword) throw new Error("Wrong Password");
+      if (!verifiedPassword) throw this.invalidPassword;
 
       if (user.password) user.password = await bcryptHash(user.password);
 
@@ -103,13 +108,13 @@ class UserServices extends BaseServices implements IUserServices {
           id: _user.id,
         },
       });
-      if (!existsUser) throw new Error("User not found");
+      if (!existsUser) throw this.userNotFound;
 
       const verifiedPassword: boolean = await bcryptVerify(
         existsUser.password,
         password
       );
-      if (!verifiedPassword) throw new Error("Wrong Password");
+      if (!verifiedPassword) throw this.invalidPassword;
 
       const updatedUser: UserType = await this.db.users.update({
         data: { isActive: false },

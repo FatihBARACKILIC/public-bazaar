@@ -5,7 +5,7 @@ class UserValidations {
     .min(3)
     .max(50)
     .regex(/^[A-Za-z]+$/)
-    .message("Name can only contain letters.");
+    .message("{#label} can only contain letters.");
   private username = Joi.string().min(3).max(50).alphanum();
   private email = Joi.string().email().max(250);
   private password = Joi.string()

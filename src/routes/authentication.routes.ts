@@ -2,10 +2,10 @@ import { Express } from "express";
 import AuthenticationController from "../controllers/authentication.controller";
 import BaseControllers from "../controllers/base.controllers";
 import IAuthenticationController from "../shared/interfaces/controllers/iAuthenticationControllers.interface";
-import validationMiddleware from "../shared/middlewares/validation.middleware";
 import requestHandlerFunctionTryCatch from "../shared/utils/requestHandlerFunctionTryCatch";
 import AuthenticationValidation from "../shared/validations/authentication.validations";
 import BaseRoutes from "./base.routes";
+import validationMiddleware from "../middlewares/validation.middleware";
 
 class AuthenticationRoutes extends BaseRoutes {
   protected readonly router: Express;

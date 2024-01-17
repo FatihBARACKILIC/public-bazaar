@@ -1,12 +1,13 @@
-import type { Express } from "express";
+import type { Express, NextFunction, Request, Response } from "express";
 import express from "express";
+import AuthenticationRoutes from "./routes/authentication.routes";
 import UserRoutes from "./routes/user.routes";
 import { API_URL } from "./shared/constant/app.constant";
 import { PORT } from "./shared/constant/config.constant";
-import errorHandler from "./shared/error/errorHandler";
-import ConfigMiddlewares from "./shared/middlewares/config.middlewares";
+import NotFoundError from "./shared/error/notFound.error";
 import logger from "./shared/utils/logger";
-import AuthenticationRoutes from "./routes/authentication.routes";
+import ConfigMiddlewares from "./middlewares/config.middlewares";
+import errorMiddleware from "./middlewares/error.middleware";
 
 /**
  * Represents the main application class.
@@ -29,6 +30,7 @@ class App {
 
     this.setConfig();
     this.setRoutes();
+    this.setNotFoundErrorHandling();
     this.setErrorHandling();
   }
 
@@ -50,8 +52,17 @@ class App {
   /**
    * Sets up the error handling middleware for the application.
    */
+  private setNotFoundErrorHandling = (): void => {
+    this.app.all("*", (req: Request, res: Response, next: NextFunction) => {
+      next(new NotFoundError());
+    });
+  };
+
+  /**
+   * Sets up the error handling middleware for the application.
+   */
   private setErrorHandling = (): void => {
-    this.app.use(errorHandler);
+    this.app.use(errorMiddleware);
   };
 
   /**
