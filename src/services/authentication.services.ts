@@ -20,6 +20,7 @@ class AuthenticationServices
       const token: string = codeJWT({
         id: user.id,
         username: user.role,
+        email: user.email,
         role: user.role,
       });
 

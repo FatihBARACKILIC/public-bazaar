@@ -29,6 +29,14 @@ interface IUserController {
   updateUser: RequestHandlerFunction;
 
   /**
+   * Freezes a user account.
+   * @param req - The request object.
+   * @param res - The response object.
+   * @param next - The next function.
+   */
+  freezeAccount: RequestHandlerFunction;
+
+  /**
    * Deletes a user.
    * @param req - The request object.
    * @param res - The response object.

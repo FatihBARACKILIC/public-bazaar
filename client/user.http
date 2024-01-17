@@ -2,10 +2,10 @@
 @user = {{url}}user/
 
 @randomNumber = {{$randomInt 0 9999999}}
+@token = {{login.response.body.$.token}}
 
-
-
-### @name createUser
+### CREATE USER
+# @name createUser
 POST {{user}} HTTP/1.1
 Content-Type: application/json
 
@@ -18,13 +18,69 @@ Content-Type: application/json
     "role": "USER"
 }
 
-### @name login
+### LOG IN
+# @name login
 POST {{url}}login HTTP/1.1
 Content-Type: application/json
-    # "username": "useruser",
 
+# "username": "useruser",
 {
     "email": "mail@mail.com",
     "password": "123456789"
 }
 
+### GET USER WITH USERNAME
+# @name getUser
+GET {{user}}useruser HTTP/1.1
+Content-Type: application/json
+
+### UPDATE USER PUT 
+# @name updateUser
+PUT {{user}} HTTP/1.1
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+    "password": "123456789",
+    "user": {
+        "firstName": "-Test",
+        "lastName": "-USER",
+        "username": "-useruser{{randomNumber}}",
+        "email": "-mail{{randomNumber}}-2@mail.com",
+        "password": "-123456789",
+        "role": "SELLER"
+    }
+}
+
+### UPDATE USER PATCH 
+# @name updateUser
+PATCH  {{user}} HTTP/1.1
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+    "password": "123456789",
+    "user": {
+        "role": "SELLER"
+    }
+}
+
+### FREEZE ACCOUNT
+# @name freezeAccount
+PATCH {{user}}freeze HTTP/1.1
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+    "password": "123456789"
+}
+
+### DELETE USER
+# @name delete
+DELETE {{user}} HTTP/1.1
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+    "password": "123456789"
+}

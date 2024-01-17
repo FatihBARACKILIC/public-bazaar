@@ -17,6 +17,19 @@ type UserType = {
   created_at?: Date;
   updated_at?: Date;
   role: "USER" | "SELLER";
+  isActive: boolean;
+};
+
+type SafeUserType = {
+  id: string;
+  firstName: string;
+  lastName: string | null;
+  username: string;
+  email: string;
+  created_at?: Date;
+  updated_at?: Date;
+  role: "USER" | "SELLER";
+  isActive: boolean;
 };
 
 type LoginType = {
@@ -28,7 +41,8 @@ type LoginType = {
 type TokenType = {
   id: string;
   username: string;
+  email: string;
   role: "USER" | "SELLER";
 };
 
-export type { CreateUserType, LoginType, TokenType, UserType };
+export type { CreateUserType, LoginType, SafeUserType, TokenType, UserType };

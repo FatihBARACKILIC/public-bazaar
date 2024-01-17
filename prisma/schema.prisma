@@ -23,6 +23,8 @@ model Users{
   updated_at  DateTime        @updatedAt
 
   role        Role            @default(USER)
+
+  isActive    Boolean         @default(true)
 }
 
 enum Role{

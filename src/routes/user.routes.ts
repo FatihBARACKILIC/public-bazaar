@@ -4,6 +4,7 @@ import UserController from "../controllers/user.controllers";
 import IUserController from "../shared/interfaces/controllers/iUserControllers.interface";
 import requestHandlerFunctionTryCatch from "../shared/utils/requestHandlerFunctionTryCatch";
 import BaseRoutes from "./base.routes";
+import authenticationMiddle from "../shared/middlewares/authentication.middleware";
 
 class UserRoutes extends BaseRoutes {
   protected readonly router: Express;
@@ -32,12 +33,26 @@ class UserRoutes extends BaseRoutes {
     // PUT /user
     this.router.put(
       this.routeMainUrl,
-      requestHandlerFunctionTryCatch(this.controller.getUser)
+      authenticationMiddle,
+      requestHandlerFunctionTryCatch(this.controller.updateUser)
     );
     // PATCH /user
     this.router.patch(
       this.routeMainUrl,
-      requestHandlerFunctionTryCatch(this.controller.getUser)
+      authenticationMiddle,
+      requestHandlerFunctionTryCatch(this.controller.updateUser)
+    );
+    // PATCH /user/freeze
+    this.router.patch(
+      this.generateSanitizedRouteUrl("freeze"),
+      authenticationMiddle,
+      requestHandlerFunctionTryCatch(this.controller.freezeAccount)
+    );
+    // DELETE /user
+    this.router.delete(
+      this.routeMainUrl,
+      authenticationMiddle,
+      requestHandlerFunctionTryCatch(this.controller.deleteUser)
     );
   }
 }

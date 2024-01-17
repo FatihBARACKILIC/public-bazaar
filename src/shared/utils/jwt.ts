@@ -12,8 +12,12 @@ const codeJWT = (data: TokenType): string => {
 };
 
 const decodeJWT = (key: string) => {
-  const decodedKey = jwt.verify(key, JWT_SECRET_KEY);
-  return decodedKey;
+  try {
+    const decodedKey = jwt.verify(key, JWT_SECRET_KEY);
+    return { auth: true, decodedKey };
+  } catch (error) {
+    return { auth: false, error };
+  }
 };
 
 export { codeJWT, decodeJWT };
