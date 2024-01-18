@@ -25,9 +25,30 @@ model Users{
   role        Role            @default(USER)
 
   isActive    Boolean         @default(true)
+
+  products    Products[]
+}
+
+model Products{
+  id          String          @id @default(uuid()) @db.Uuid
+
+  name        String
+  price       Decimal
+  quantity    Int
+  description String
+  image       String[]
+
+  created_at  DateTime         @default(now())
+  updated_at  DateTime         @updatedAt
+
+  isActive    Boolean          @default(true)
+
+  user        Users            @relation(fields: [userId], references: [id])
+  userId      String           @db.Uuid
 }
 
 enum Role{
   USER
   SELLER
 }
+
