@@ -6,7 +6,7 @@ import requestHandlerFunctionTryCatch from "../shared/utils/requestHandlerFuncti
 import BaseRoutes from "./base.routes";
 import UserValidations from "../shared/validations/user.validations";
 import validationMiddleware from "../middlewares/validation.middleware";
-import authenticationMiddle from "../middlewares/authentication.middleware";
+import authenticationMiddleware from "../middlewares/authentication.middleware";
 
 class UserRoutes extends BaseRoutes {
   protected readonly router: Express;
@@ -39,28 +39,28 @@ class UserRoutes extends BaseRoutes {
     this.router.put(
       this.routeMainUrl,
       validationMiddleware(this.validations.updateUser),
-      authenticationMiddle,
+      authenticationMiddleware,
       requestHandlerFunctionTryCatch(this.controller.updateUser)
     );
     // PATCH /user
     this.router.patch(
       this.routeMainUrl,
       validationMiddleware(this.validations.updateUser),
-      authenticationMiddle,
+      authenticationMiddleware,
       requestHandlerFunctionTryCatch(this.controller.updateUser)
     );
     // PATCH /user/freeze
     this.router.patch(
       this.generateSanitizedRouteUrl("freeze"),
       validationMiddleware(this.validations.onlyPassword),
-      authenticationMiddle,
+      authenticationMiddleware,
       requestHandlerFunctionTryCatch(this.controller.freezeAccount)
     );
     // DELETE /user
     this.router.delete(
       this.routeMainUrl,
       validationMiddleware(this.validations.onlyPassword),
-      authenticationMiddle,
+      authenticationMiddleware,
       requestHandlerFunctionTryCatch(this.controller.deleteUser)
     );
   }

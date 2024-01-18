@@ -1,0 +1,104 @@
+@url = http://localhost:3000/api/v1/
+@product = {{url}}products/
+
+@randomNumber = {{$randomInt 0 9999999}}
+@token = {{login.response.body.$.token}}
+
+### LOG IN
+# @name login
+POST {{url}}login HTTP/1.1
+Content-Type: application/json
+
+    # "username": "useruser",
+{
+    "username": "deneme",
+    "password": "1aB!cD0*"
+}
+
+### CREATE PRODUCT
+# @name createProduct
+
+POST {{product}} HTTP/1.1
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+    "name": "product name {{randomNumber}}",
+    "price": "{{randomNumber}}",
+    "quantity": "{{randomNumber}}",
+    "description": "product description {{randomNumber}}",
+    "image": [
+        "https://images.unsplash.com/photo-1705404193661-73eb21f6514a",
+        "https://images.unsplash.com/photo-1704974061502-e2ab1e9591ce",
+        "https://images.unsplash.com/photo-1705320678676-2a031dd6e7fa",
+        "https://images.unsplash.com/photo-1705572968069-edff8c56684b"
+    ]
+}
+
+### PUT PRODUCT
+# @name updateProduct
+
+PUT {{product}} HTTP/1.1
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+    "password": "1aB!cD0*",
+    "id": "c318f400-d066-4f35-b51a-6289307b2bb9",
+    "product": {
+        "name": "PUT - product name {{randomNumber}}",
+        "price": "1{{randomNumber}}",
+        "quantity": "1{{randomNumber}}",
+        "description": "PUT - product description {{randomNumber}}",
+        "image": [
+            "https://images.unsplash.com/photo-1705404193661-73eb21f6514a",
+            "https://images.unsplash.com/photo-1705320678676-2a031dd6e7fa"
+        ]
+    }
+}
+
+### PATCH PRODUCT
+# @name updateProduct
+
+PATCH {{product}} HTTP/1.1
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+    "password": "1aB!cD0*",
+    "id": "8a601660-aec3-4932-8e62-e528f5d26f74",
+    "product": {
+        "price": "9"
+    }
+}
+
+### DELETE PRODUCT
+# @name deleteProduct
+
+DELETE {{product}} HTTP/1.1
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+    "password": "1aB!cD0*",
+    "id": "c318f400-d066-4f35-b51a-6289307b2bb9",
+}
+
+### GET PRODUCTS
+# @name getProducts
+
+GET {{product}} HTTP/1.1
+
+### GET PRODUCTS 1/5
+
+GET {{product}}?pageNumber=2&limit=10 HTTP/1.1
+
+### GET PRODUCTS WITH SELLER NAME
+# @name getProductsWithSellerName
+
+GET {{product}}useruser HTTP/1.1
+
+### GET PRODUCT
+# @name getProduct
+
+GET {{url}}product/c318f400-d066-4f35-b51a-6289307b2bb9 HTTP/1.1

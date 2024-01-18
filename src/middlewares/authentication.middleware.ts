@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import HttpStatusCode from "../enums/httpStatusCode.enum";
-import { decodeJWT } from "../utils/jwt";
+import HttpStatusCode from "../shared/enums/httpStatusCode.enum";
+import { decodeJWT } from "../shared/utils/jwt";
 
-const authenticationMiddle = async (
+const authenticationMiddleware = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -26,4 +26,4 @@ const authenticationMiddle = async (
   next();
 };
 
-export default authenticationMiddle;
+export default authenticationMiddleware;

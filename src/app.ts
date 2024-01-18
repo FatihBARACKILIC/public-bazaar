@@ -8,6 +8,7 @@ import NotFoundError from "./shared/error/notFound.error";
 import logger from "./shared/utils/logger";
 import ConfigMiddlewares from "./middlewares/config.middlewares";
 import errorMiddleware from "./middlewares/error.middleware";
+import ProductRoutes from "./routes/product.routes";
 
 /**
  * Represents the main application class.
@@ -47,6 +48,7 @@ class App {
   private setRoutes = (): void => {
     new UserRoutes(this.app);
     new AuthenticationRoutes(this.app);
+    new ProductRoutes(this.app);
   };
 
   /**
@@ -54,7 +56,7 @@ class App {
    */
   private setNotFoundErrorHandling = (): void => {
     this.app.all("*", (req: Request, res: Response, next: NextFunction) => {
-      next(new NotFoundError());
+      next(new NotFoundError("Page Not Found"));
     });
   };
 

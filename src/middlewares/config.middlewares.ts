@@ -2,7 +2,7 @@ import cors from "cors";
 import type { Express, NextFunction, Request, Response } from "express";
 import express from "express";
 import helmet from "helmet";
-import logger from "../utils/logger";
+import logger from "../shared/utils/logger";
 
 /**
  * Base class for configuring middlewares in Express.

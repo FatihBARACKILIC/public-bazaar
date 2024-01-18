@@ -1,6 +1,6 @@
 import { NextFunction, Request, RequestHandler, Response } from "express";
 import Joi from "joi";
-import ValidationError from "../error/validation.error";
+import ValidationError from "../shared/error/validation.error";
 
 const validationMiddleware = (schema: Joi.ObjectSchema): RequestHandler => {
   return (req: Request, res: Response, next: NextFunction): void => {
