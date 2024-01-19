@@ -10,6 +10,7 @@ import { bcryptHash, bcryptVerify } from "../shared/utils/bcrypt";
 import BaseServices from "./base.services";
 import NotFoundError from "../shared/error/notFound.error";
 import UnauthorizedError from "../shared/error/unauthorized.error";
+import mail from "../shared/utils/mail";
 
 class UserServices extends BaseServices implements IUserServices {
   private readonly userNotFound = new NotFoundError("User not found");
@@ -38,6 +39,8 @@ class UserServices extends BaseServices implements IUserServices {
         },
       });
       const { password: _, ...safeData } = result;
+
+      await mail(safeData);
 
       return safeData;
     } catch (error: unknown) {
